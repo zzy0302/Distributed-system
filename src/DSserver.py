@@ -21,7 +21,7 @@ def call_grep_cmd(command: str) -> bytes:
 		for item in output_list:
 			yield item + '\n'
 	except subprocess.CalledProcessError as error:
-		if error.returncode == 1:
+		if error.returncode == 1 or error.returncode == 2:
 			yield
 
 def _scan():

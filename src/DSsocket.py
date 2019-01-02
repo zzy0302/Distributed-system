@@ -88,6 +88,7 @@ class TCPSocket:
 	def send(self, message):
 		try:
 			msg=message.encode()
+			print(msg)
 			totalsent = 0
 			while totalsent < len(msg):
 				sent = self.sock.send(msg[totalsent:])
@@ -113,7 +114,6 @@ class TCPSocket:
 
 		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
-		print(b''.join(chunks).decode())
 		return b''.join(chunks).decode()
 
 	def bind(self, address_port):
