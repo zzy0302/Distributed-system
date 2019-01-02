@@ -111,7 +111,7 @@ class TCPSocket:
 
 	def bind(self, address_port):
 		try:
-		   	self.sock.bind(address_port)
+		   	self.sock.bind((address_port))
 		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 

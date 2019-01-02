@@ -19,7 +19,6 @@ def node_process(pattern: str, nodes: dict) -> dict:
 			node['sock'] = TCPSocket()
 			node['sock'].connect((node['ip'], _server_port))
 			pattern_copy = copy.deepcopy(pattern)
-
 			message = ' '.join(pattern_copy)
 			node['sock'].send(message)
 			node['status'] = True
@@ -63,7 +62,7 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 	while True:
 		for node in nodes:
 			node = node_detected(node, mode)
-
+			print (node)
 		if functools.reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
 			for node in nodes:
 				if not node['status']:
