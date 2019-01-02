@@ -1,20 +1,35 @@
+import os
+import json
 import queue
 import socket
 import select
 import telnetlib
 import threading
+file_name = 'config.json'
+number = 0
+# _all_logs = []
+# _lock = threading.Lock()
 
 def get_ip_status(ip):
-	server = telnetlib.Telnet()
-	port = 22
-	try:
-		server.open(ip,port)
-		print('{0} port {1} is open'.format(ip, port))
-
-	except Exceptio n as err:
-		print('{0} port {1} is not open'.format(ip,port))
-	finally:
-		server.close()
+	global file_name
+	with open(file_name, 'a') as file_obj:
+		global number
+		port = 22
+		try:
+			server = telnetlib.Telnet(ip,port,timeout=3)
+			# _lock.acquire()
+			node = {'name': 'node_' + str(number), 'ip': str(ip), 'port': str(port)}
+			# node = _all_logs.append(nodes)
+			number = number + 1
+			print (node)
+			json.dump(node, file_obj)
+			file_obj.write(',')
+			print("node " + str(number) + " has been added.")
+			# _lock.release()	
+			#print('{0} port {1} is open'.format(ip, port))
+		except Exception as err:
+			
+			print('{0} port {1} is not open'.format(ip,port))
 
 def check_open(q):
 	try:
@@ -25,20 +40,35 @@ def check_open(q):
 		pass		
 
 if __name__ == "__main__":
-	try:	
-		myname = socket.getfqdn(socket.gethostname())
-		myaddr = socket.gethostbyname(myname)
-		a = str(myaddr).split(".")
-		host = a[0]+'.'+a[1]+'.'+a[2]+'.'
-		q=queue.Queue()
-		for i in range(1,255):
-			q.put(host+str(i))
-		threads = []
-		for i in range(255):
-			t = threading.Thread(target=check_open,args=(q,))
-			t.start()
-			threads.append(t)
-		for t in threads:
-			t.join()
-	except SocketError as e:
-		print(str(e) + ' : ' + self.__class__.__name__)
+	# try:	
+	with open(file_name, 'w') as file_obj:
+		file_obj.write('[')
+	node = []
+	number = 0
+	myname = socket.getfqdn(socket.gethostname())
+	myaddr = socket.gethostbyname(myname)
+	a = str(myaddr).split(".")
+	host = a[0]+'.'+a[1]+'.'+a[2]+'.'
+	q=queue.Queue()
+	for i in range(1,255):
+		q.put(host+str(i))
+	threads = []
+	for i in range(255):
+		t = threading.Thread(target=check_open,args=(q,))
+		t.start()
+		threads.append(t)
+	for t in threads:
+		t.join()
+	with open(file_name, 'rb+') as file_obj:
+		file_obj.seek(-1, os.SEEK_END)
+		file_obj.truncate()
+	with open(file_name, 'a') as file_obj:
+		file_obj.write(']')
+	# with open(file_name, 'w') as file_obj:
+	# 	json.dump(_all_logs, file_obj)
+	with open(file_name) as file_obj:
+		nodes = json.load(file_obj)
+		print(nodes)
+	# except Exception as e:
+	# 	print('error')
+		# print(str(e) + ' : ' + self.__class__.__name__)
