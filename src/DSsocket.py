@@ -6,6 +6,12 @@ import select
 import telnetlib
 import threading
 class TCPSocket:
+	def __init__(self, sock=None):
+		if sock is None:
+			self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		else:
+			self.sock = sock
+			
 	file_name = 'config.json'
 	number = 0
 	def get_ip_status(ip):
