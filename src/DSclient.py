@@ -93,7 +93,7 @@ def new_connect_to_server(pattern, filename='config.json', mode=0):
 						chunk = node['sock'].recv(_message_length)
 						if chunk == '':
 							node['complete'] = True
-							return node
+							# return node
 						node['buffer'] += chunk
 						records = node['buffer'].split('\n')
 						print('records: ', records)
@@ -102,15 +102,15 @@ def new_connect_to_server(pattern, filename='config.json', mode=0):
 								print(node['name'] + ': ' + records[i])
 							node['count'] += 1
 						node['buffer'] = records[-1]
-						return node
+						# return node
 					else:
 						node['complete'] = True
-						return node
+						# return node
 				except ConnectionRefusedError as e:
 					print(str(e) + ': ' + node['name'])
 					node['status'] = False
 					node['complete'] = True
-					return node
+					# return node
 			# node = node_detected(node, mode)
 		if functools.reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
 			for node in nodes:
@@ -177,7 +177,7 @@ if __name__ == "__main__":
 		# print("1")
 		# print (pattern)
 		start = time.time()
-		connect_to_server(command)
+		new_connect_to_server(command)
 		print("end")
 		end = time.time()
 		print("Query time: %.4fs" %(end - start))
