@@ -65,6 +65,7 @@ def node_detected(node: dict, mode: int) -> dict:
 
 
 def new_connect_to_server(pattern, filename='config.json', mode=0):
+	global _message_length
 	with open(filename,'r') as file_obj:
 		nodes = json.loads(file_obj.read())
 	params = {'buffer': '', 'complete': False, 'count': 0}
