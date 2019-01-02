@@ -22,6 +22,7 @@ def node_process(pattern: str, nodes: dict) -> dict:
 			# pattern_copy = copy.deepcopy(pattern)
 			pattern_copy = pattern
 			message = ' '.join(pattern_copy)
+			print(message)
 			node['sock'].send(message)
 			node['status'] = True
 			# print("3")
