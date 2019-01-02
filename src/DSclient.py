@@ -65,7 +65,6 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 	while True:
 		for node in nodes:
 			node = node_detected(node, mode)
-			
 			print (node)
 		if functools.reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
 			for node in nodes:

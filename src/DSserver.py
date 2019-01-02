@@ -8,6 +8,7 @@ import threading
 import subprocess
 from DSsocket import *
 
+_flag = 0
 _port = 20009
 _buffer_size = 4096
 file_name = 'config.json'
@@ -24,7 +25,7 @@ def call_grep_cmd(command: str) -> bytes:
 			yield
 
 def _scan():
-	while True:
+	while True && _flag:
 		DSscanning()
 		os.remove(file_name)
 		os.rename('temp.json', file_name)
@@ -41,10 +42,12 @@ if __name__ == "__main__":
 	scan.start()
 
 	while True:
+		_flag = 1
 		client, client_info = server.accept()
 		message = client.sock.recv(_buffer_size)
 		grep_cmd = message.decode('utf-8')
 		for output in call_grep_cmd(grep_cmd):
+			_flag = 0
 			try:
 				print(output)
 				client.send(output.encode())
