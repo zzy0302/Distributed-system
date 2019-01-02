@@ -1,2 +1,2 @@
 #!/bin/bash
-unhup python3 DSserver.py &
+nohup python3 DSserver.py &
