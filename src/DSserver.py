@@ -15,7 +15,7 @@ file_name = 'config.json'
 def call_grep_cmd(command: str) -> bytes:
 	try:
 		result = subprocess.check_output(command, shell=True)
-		result = str(output.decode('utf-8'))
+		result = str(result.decode('utf-8'))
 		output_list = list(filter(result.split("\n")))
 		for item in output_list:
 			yield item + '\n'
