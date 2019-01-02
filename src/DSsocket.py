@@ -1,11 +1,15 @@
+import queue
 import socket
 import select
+import telnetlib
+import threading
 class TCPSocket:
 	def __init__(self, sock=None):
 		try:
 			self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		except SocketError as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
+	def 		
 
 	def connect(self, host_port):
 		try:
