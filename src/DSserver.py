@@ -42,7 +42,6 @@ if __name__ == "__main__":
 	server.listen(10)
 	scan=threading.Thread(target=_scan)
 	scan.start()
-
 	while True:
 		_flag = 1
 		_flag = 0
