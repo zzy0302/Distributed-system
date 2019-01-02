@@ -51,7 +51,7 @@ if __name__ == "__main__":
 		for output in call_grep_cmd(grep_cmd):
 			try:
 				print(output)
-				client.send(output.encode())
+				client.send(output)
 			except Exception:
 				pass
 		client.close()
