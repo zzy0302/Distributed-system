@@ -16,7 +16,7 @@ def call_grep_cmd(command: str) -> bytes:
 	try:
 		result = subprocess.check_output(command, shell=True)
 		result = str(result.decode('utf-8'))
-		output_list = list(filter(result.split("\n")))
+		output_list = list(filter(None, result.split("\n")))
 		for item in output_list:
 			yield item + '\n'
 	except subprocess.CalledProcessError as error:
@@ -50,6 +50,5 @@ if __name__ == "__main__":
 				client.send(output.encode())
 			except Exception:
 				pass
-
 		client.close()
 		
