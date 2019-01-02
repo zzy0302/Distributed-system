@@ -25,7 +25,7 @@ def call_grep_cmd(command: str) -> bytes:
 			yield
 
 def _scan():
-	while True && _flag:
+	while True and _flag:
 		DSscanning()
 		os.remove(file_name)
 		os.rename('temp.json', file_name)
