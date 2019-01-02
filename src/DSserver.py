@@ -2,9 +2,10 @@ import re
 import sys
 import copy
 import socket
-import DSsocket
 import subprocess
-PORT = 12345
+from DSsocket import *
+
+PORT = 20000
 BUF_SIZE = 4096
 
 def callGrepOnVM(grepCall):

@@ -3,10 +3,9 @@ import json
 import copy
 import time
 import socket
-import DSsocket
 from DSsocket import *
 
-_server_port = 12345
+_server_port = 20000
 _message_length = 4096
 
 
