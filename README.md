@@ -1,21 +1,26 @@
-# Distributed system 第二次编程作业
+# Distributed system 第二、三次编程作业
 
 ## 组员
 
 1652782 张智源
 
-文添
+1552693 文添
 
-陈润乾
+1652794 陈润乾
 
-## 实现内容
+## 项目分工
 
-消息队列：DSquery.py 写了没测
 
-客户端进程：DSclient.py 写了没测
 
-服务端进程：DSserver.py 没写
+客户端进程：陈润乾、文添
 
-socket轮子：DSsocket.py 写了没测
+服务端进程：陈润乾、文添
 
-多线程轮子：DSthread.py 写了测试中
+socket轮子、心跳检测：张智源
+
+项目文档：文添、陈润乾、张智源
+
+~~~~
+
+~~~~
+

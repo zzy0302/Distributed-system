@@ -24,7 +24,6 @@ def get_ip_status(ip):
 			# print("node " + str(number) + " has been added.")
 		except Exception as err:
 			pass
-			
 
 def check_open(q):
 	try:

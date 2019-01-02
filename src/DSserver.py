@@ -7,7 +7,7 @@ import threading
 import subprocess
 from DSsocket import *
 
-_port = 20001
+_port = 20008
 _buffer_size = 4096
 
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
 	server.listen(10)
 	scan=threading.Thread(target=_scan)
 	scan.start()
-	
+
 	while True:
 		client, client_info = server.accept()
 		message = client.sock.recv(_buffer_size)

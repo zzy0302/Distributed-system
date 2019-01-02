@@ -5,7 +5,7 @@ import time
 import socket
 from DSsocket import *
 
-_server_port = 20005
+_server_port = 20008
 _message_length = 4096
 
 
@@ -31,7 +31,6 @@ def node_process(pattern: str, nodes: dict) -> dict:
 
 def node_detected(node: dict, mode: int) -> dict:
 	global _message_length
-
 	if node['status'] and not node['complete']:
 		try:
 			if node['sock'].activityDetected(5):
@@ -64,7 +63,7 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 
 	while True:
 		for node in nodes:
-			node = node_detected(node)
+			node = node_detected(node, mode)
 
 		if reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
 			for node in nodes:
