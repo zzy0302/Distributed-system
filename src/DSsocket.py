@@ -101,11 +101,16 @@ class TCPSocket:
 		try:
 			chunks = []
 			bytes_recd = 0
-			while bytes_recd < msgLen:
+			count = 0
+			while bytes_recd < msgLen and count < 10:
 				chunk = self.sock.recv(msgLen - bytes_recd)
-				print (chunk)
-				chunks.append(chunk)
-				bytes_recd = bytes_recd + len(chunk)
+
+				if chunk != b''
+					chunks.append(chunk)
+					bytes_recd = bytes_recd + len(chunk)
+				else
+					count = count+1
+
 		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 		return b''.join(chunks).decode()
