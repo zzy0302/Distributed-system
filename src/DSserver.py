@@ -25,11 +25,13 @@ def call_grep_cmd(command: str) -> bytes:
 			yield
 
 def _scan():
+	global _flag
 	while True and _flag:
 		DSscanning()
 		os.remove(file_name)
 		os.rename('temp.json', file_name)
 		time.sleep(2)
+	print (_flag)
 		
 
 
@@ -43,11 +45,11 @@ if __name__ == "__main__":
 
 	while True:
 		_flag = 1
+		_flag = 0
 		client, client_info = server.accept()
 		message = client.sock.recv(_buffer_size)
 		grep_cmd = message.decode('utf-8')
 		for output in call_grep_cmd(grep_cmd):
-			_flag = 0
 			try:
 				print(output)
 				client.send(output.encode())
