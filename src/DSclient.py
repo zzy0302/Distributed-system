@@ -6,7 +6,7 @@ import socket
 import functools
 from DSsocket import *
 
-_server_port = 20008
+_server_port = 20009
 _message_length = 4096
 
 
@@ -20,8 +20,8 @@ def node_process(pattern: str, nodes: dict) -> dict:
 			node['sock'].connect((node['ip'], _server_port))
 			pattern_copy = copy.deepcopy(pattern)
 
-			m = ''.join(pattern_copy)
-			node['sock'].send(m)
+			message = ' '.join(pattern_copy)
+			node['sock'].send(message)
 			node['status'] = True
 		except ConnectionRefusedError as e:
 			node['status'] = False
@@ -59,9 +59,7 @@ def node_detected(node: dict, mode: int) -> dict:
 def connect_to_server(pattern, filename='config.json', mode=0):
 	with open(filename,'r') as file_obj:
 		nodes = json.loads(file_obj.read())
-
-	nodes = node_process(pattern, nodes)
-
+		nodes = node_process(pattern, nodes)
 	while True:
 		for node in nodes:
 			node = node_detected(node, mode)
@@ -79,6 +77,7 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 
 if __name__ == "__main__":
 	pattern = sys.argv[1:]
+	print (pattern)
 	start = time.time()
 	connect_to_server(pattern)
 	end = time.time()

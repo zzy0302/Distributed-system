@@ -1,3 +1,4 @@
+import os
 import re
 import sys
 import copy
@@ -7,9 +8,9 @@ import threading
 import subprocess
 from DSsocket import *
 
-_port = 20008
+_port = 20009
 _buffer_size = 4096
-
+file_name = 'config.json'
 
 def call_grep_cmd(command: str) -> bytes:
 	try:
@@ -24,8 +25,11 @@ def call_grep_cmd(command: str) -> bytes:
 
 def _scan():
 	while True:
-		time.sleep(2)
 		DSscanning()
+		os.remove(file_name)
+		os.rename('temp.json', file_name)
+		time.sleep(2)
+		
 
 
 
@@ -46,6 +50,6 @@ if __name__ == "__main__":
 				client.send(output.encode())
 			except Exception:
 				pass
+
 		client.close()
-		
 		

@@ -7,7 +7,7 @@ import telnetlib
 import threading
 
 
-file_name = 'config.json'
+file_name = 'temp.json'
 number = 0
 def get_ip_status(ip):
 	global file_name
@@ -15,7 +15,7 @@ def get_ip_status(ip):
 		global number
 		port = 22
 		try:
-			server = telnetlib.Telnet(ip,port,timeout=3)
+			server = telnetlib.Telnet(ip,port,timeout=2)
 			node = {'name': 'node_' + str(number), 'ip': str(ip), 'port': str(port)}
 			number = number + 1
 			# print (node)
