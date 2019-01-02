@@ -46,6 +46,7 @@ def node_detected(node: dict, mode: int) -> dict:
 					return node
 				node['buffer'] += chunk
 				records = node['buffer'].split('\n')
+				print('records: ', records)
 				for i in range(len(records) - 1):
 					if mode == 0:
 						print(node['name'] + ': ' + records[i])
