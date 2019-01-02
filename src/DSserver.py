@@ -2,7 +2,6 @@ import re
 import sys
 import copy
 import socket
-import DSquery
 import DSsocket
 import subprocess
 PORT = 12345
@@ -12,7 +11,6 @@ def callGrepOnVM(grepCall):
 	pattern = grepCall.split(" ")
 	pattern.insert(0,u'grep')
 	pattern.insert(1,u'-n')
-
 	try:
 		output = subprocess.check_output(pattern).decode('utf-8').strip()
 		output = str(output)
@@ -26,6 +24,7 @@ def callGrepOnVM(grepCall):
 			yield
 
 if __name__ == "__main__":
+	scanning()
 	server = TCPSocket()
 	server.bind(('', PORT))
 	server.listen(10)

@@ -8,7 +8,6 @@ import threading
 file_name = 'config.json'
 number = 0
 
-
 def get_ip_status(ip):
 	global file_name
 	with open(file_name, 'a') as file_obj:
