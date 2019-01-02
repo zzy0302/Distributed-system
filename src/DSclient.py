@@ -91,7 +91,7 @@ def new_connect_to_server(pattern, filename='config.json', mode=0):
 			if node['status'] and not node['complete']:
 				try:
 					if node['sock'].activityDetected(5):
-						chunk = node.recv(_message_length)
+						chunk = node['sock'].recv(_message_length)
 						print(chunk)
 						if chunk == '':
 							node['complete'] = True
