@@ -9,11 +9,11 @@ import DSsocket
 SERVER_PORT = 12345
 MSGLEN = 4096
 
-def connect_to_server(pattern, filename='./conf.json', unittestmode=0):
+
+def connect_to_server(pattern, filename='config.json', unittestmode=0):
 	
 	with open(filename,'r') as handle:
 		nodes = json.loads(handle.read())
-
 	
 	for node in nodes:
 		node['buffer'] = ''
@@ -30,7 +30,6 @@ def connect_to_server(pattern, filename='./conf.json', unittestmode=0):
 		except ConnectionRefusedError as e:
 			node['status'] = False
 			node['complete'] = True
-
 
 	while True:
 		for node in nodes:
@@ -72,6 +71,3 @@ if __name__ == "__main__":
 	connect_to_server(pattern)
 	end = time.time()
 	print("Query time: %.6fs" %(end - start))
-
-	
-

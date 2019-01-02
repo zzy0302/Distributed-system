@@ -3,6 +3,7 @@ import sys
 import subprocess
 import copy
 
+
 def doQuery(pattern, filename):
     pattern2 = pattern
     if pattern2[0:2] != '.*':
@@ -24,6 +25,7 @@ def doQuery(pattern, filename):
             result.append(output)
     f.close()
     return '\n'.join(result)
+
 
 def doQuery2(pattern, filename):
     pattern2 = pattern
@@ -71,4 +73,3 @@ if __name__ == '__main__':
 	print(grepCall)
 	for output in callGrepOnVM(grepCall):
 		print(output)
-	

@@ -2,8 +2,10 @@ import sys
 import socket
 import DSquery
 import DSsocket
+
 PORT = 12345
 BUF_SIZE = 4096
+
 
 def parser_msg(msg):
 	msg_d = msg.decode()

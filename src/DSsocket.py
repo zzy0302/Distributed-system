@@ -5,6 +5,8 @@ import socket
 import select
 import telnetlib
 import threading
+
+
 class TCPSocket:
 	file_name = 'config.json'
 	number = 0
@@ -25,6 +27,7 @@ class TCPSocket:
 				
 				print('{0} port {1} is not open'.format(ip,port))
 
+
 	def check_open(q):
 		try:
 			while True:
@@ -33,9 +36,10 @@ class TCPSocket:
 		except queue.Empty as e:
 			pass		
 
-	def scanning:
+
+	def scanning():
 		with open(file_name, 'w') as file_obj:
-		file_obj.write('[')
+			file_obj.write('[')
 		node = []
 		number = 0
 		myname = socket.getfqdn(socket.gethostname())
@@ -60,16 +64,19 @@ class TCPSocket:
 		with open(file_name) as file_obj:
 			nodes = json.load(file_obj)
 			print(nodes)
+
+
 	def connect(self, host_port):
 		try:
 			self.sock.connect(host_port)
-		except SocketError as e:
+		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
+
 
 	def close(self):
 		try:
 			self.sock.close()
-		except SocketError as e:
+		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 
 
@@ -82,8 +89,9 @@ class TCPSocket:
 				if sent == 0:
 					raise RuntimeError("Connection ERROR")
 				totalsent = totalsent + sent
-		except SocketError as e:
+		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
+
 
 	def recv(self, msgLen):
 		try:
@@ -93,29 +101,33 @@ class TCPSocket:
 				chunk = self.sock.recv(msgLen - bytes_recd)
 				chunks.append(chunk)
 				bytes_recd = bytes_recd + len(chunk)
-		except SocketError as e:
+		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 		return b''.join(chunks).decode()
+
 
 	def bind(self, address_port):
 		try:
 		   	self.sock.bind(address_port)
-		except SocketError as e:
+		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
+
 
 	def listen(self, backlog):
 		try:
 			self.sock.listen(backlog)
-		except SocketError as e:
+		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
+
 
 	def accept(self):
 		try:
 			client_sock, client_info = self.sock.accept()
 			return TCPSocket(client_sock), client_info
-		except SocketError as e:
+		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
-			
+
+
 	def activityDetected(self, timeout = None):
 		if timeout == None:
 			ready_to_read, ready_to_write, in_error = select.select([self.sock], [], [])
