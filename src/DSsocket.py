@@ -33,10 +33,12 @@ def check_open(q):
 			get_ip_status(ip)
 	except queue.Empty as e:
 		pass		
+
 def DSscanning():
 	with open(file_name, 'w') as file_obj:
 		file_obj.write('[')
 	node = []
+	global number 
 	number = 0
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	s.connect(('8.8.8.8', 80))

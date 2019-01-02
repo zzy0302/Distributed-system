@@ -1,11 +1,13 @@
 import re
 import sys
 import copy
+import time
 import socket
+import threading
 import subprocess
 from DSsocket import *
 
-_port = 20003
+_port = 20001
 _buffer_size = 4096
 
 
@@ -20,13 +22,20 @@ def call_grep_cmd(command: str) -> bytes:
 		if error.returncode == 1:
 			yield
 
+def _scan():
+	while True:
+		time.sleep(2)
+		DSscanning()
+
+
 
 if __name__ == "__main__":
-	DSscanning()
 	server = TCPSocket()
 	server.bind(('', _port))
 	server.listen(10)
-
+	scan=threading.Thread(target=_scan)
+	scan.start()
+	
 	while True:
 		client, client_info = server.accept()
 		message = client.sock.recv(_buffer_size)
@@ -38,5 +47,5 @@ if __name__ == "__main__":
 			except Exception:
 				pass
 		client.close()
-
+		
 		

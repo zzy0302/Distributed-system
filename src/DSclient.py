@@ -5,23 +5,21 @@ import time
 import socket
 from DSsocket import *
 
-_server_port = 20003
+_server_port = 20005
 _message_length = 4096
 
 
-def node_process(nodes: dict) -> dict:
+def node_process(pattern: str, nodes: dict) -> dict:
 	global _server_port
-
 	params = {'buf': '', 'complete': False, 'count': 0}
 	for node in nodes:
 		node.update(params)
-
 		try:
 			node['sock'] = TCPSocket()
 			node['sock'].connect((node['ip'], _server_port))
 			pattern_copy = copy.deepcopy(pattern)
-			pattern_copy.append(node['log_path'])
-			m = ' '.join(pattern_copy)
+
+			m = join(pattern_copy)
 			node['sock'].send(m)
 			node['status'] = True
 		except ConnectionRefusedError as e:
@@ -61,8 +59,8 @@ def node_detected(node: dict, mode: int) -> dict:
 def connect_to_server(pattern, filename='config.json', mode=0):
 	with open(filename,'r') as file_obj:
 		nodes = json.loads(file_obj.read())
-	
-	nodes = node_process(nodes)
+
+	nodes = node_process(pattern, nodes)
 
 	while True:
 		for node in nodes:
