@@ -82,11 +82,17 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 
 
 if __name__ == "__main__":
-	pattern = sys.argv[1:]
-	# print("1")
-	# print (pattern)
-	start = time.time()
-	connect_to_server(pattern)
-	print("end")
-	end = time.time()
-	print("Query time: %.4fs" %(end - start))
+	while True:
+		_input = input()
+		command = list(filter(None, _input.split()))
+		if command[0] == 'exit':
+			break
+		# pattern = sys.argv[1:]
+		# print("1")
+		# print (pattern)
+		start = time.time()
+		connect_to_server(command)
+		print("end")
+		end = time.time()
+		print("Query time: %.4fs" %(end - start))
+		pass
