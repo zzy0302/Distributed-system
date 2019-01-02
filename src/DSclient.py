@@ -95,6 +95,7 @@ def new_connect_to_server(pattern, filename='config.json', mode=0):
 						if chunk == '':
 							node['complete'] = True
 							# return node
+							continue
 						node['buffer'] += chunk
 						records = node['buffer'].split('\n')
 						print('records: ', records)
