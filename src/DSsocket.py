@@ -98,7 +98,6 @@ class TCPSocket:
 		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 
-
 	def recv(self, msgLen):
 		try:
 			chunks = []
@@ -111,21 +110,17 @@ class TCPSocket:
 			print(str(e) + ' : ' + self.__class__.__name__)
 		return b''.join(chunks).decode()
 
-
 	def bind(self, address_port):
 		try:
 		   	self.sock.bind(address_port)
 		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 
-<<<<<<< HEAD
-
 	def listen(self, backlog):
 		try:
 			self.sock.listen(backlog)
 		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
-
 
 	def accept(self):
 		try:
@@ -134,22 +129,6 @@ class TCPSocket:
 		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 
-
-=======
-	def accept(self):
-		try:
-			client_sock, client_info = self.sock.accept()
-			return TCPSocket(client_sock), client_info
-		except SocketError as e:
-			print(str(e) + ' : ' + self.__class__.__name__)
-
-	def listen(self, backlog):
-		try:
-			self.sock.listen(backlog)
-		except SocketError as e:
-			print(str(e) + ' : ' + self.__class__.__name__)
-
->>>>>>> 0fae74eba307dd5e638d3b56089d6ec10316097d
 	def activityDetected(self, timeout = None):
 		if timeout == None:
 			ready_to_read, ready_to_write, in_error = select.select([self.sock], [], [])
