@@ -12,7 +12,7 @@ _message_length = 4096
 
 def node_process(pattern: str, nodes: dict) -> dict:
 	global _server_port
-	print("2")
+	# print("2")
 	params = {'buf': '', 'complete': False, 'count': 0}
 	for node in nodes:
 		node.update(params)
@@ -23,7 +23,7 @@ def node_process(pattern: str, nodes: dict) -> dict:
 			message = ' '.join(pattern_copy)
 			node['sock'].send(message)
 			node['status'] = True
-			print("3")
+			# print("3")
 		except ConnectionRefusedError as e:
 			node['status'] = False
 			node['complete'] = True
@@ -61,14 +61,13 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 	with open(filename,'r') as file_obj:
 		nodes = json.loads(file_obj.read())
 		nodes = node_process(pattern, nodes)
-		print("4")
 	while True:
 		for node in nodes:
 			node = node_detected(node, mode)
-			print (node)
+			# print (node)
 		if functools.reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
 			for node in nodes:
-				print("5")
+				# print("5")
 				if not node['status']:
 					print(node['name'] + 'caught an error.')
 				else:
@@ -80,8 +79,8 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 
 if __name__ == "__main__":
 	pattern = sys.argv[1:]
-	print("1")
-	print (pattern)
+	# print("1")
+	# print (pattern)
 	start = time.time()
 	connect_to_server(pattern)
 	print("end")
