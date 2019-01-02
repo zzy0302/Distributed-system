@@ -5,7 +5,7 @@ import time
 import socket
 from DSsocket import *
 
-_server_port = 20000
+_server_port = 20002
 _message_length = 4096
 
 

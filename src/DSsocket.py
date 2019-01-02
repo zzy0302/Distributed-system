@@ -23,9 +23,8 @@ def get_ip_status(ip):
 			file_obj.write(',')
 			print("node " + str(number) + " has been added.")
 		except Exception as err:
+			pass
 			
-			print('{0} port {1} is not open'.format(ip,port))
-
 
 def check_open(q):
 	try:
@@ -34,13 +33,15 @@ def check_open(q):
 			get_ip_status(ip)
 	except queue.Empty as e:
 		pass		
-def scanning():
+def DSscanning():
 	with open(file_name, 'w') as file_obj:
 		file_obj.write('[')
 	node = []
 	number = 0
-	myname = socket.getfqdn(socket.gethostname())
-	myaddr = socket.gethostbyname(myname)
+	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	s.connect(('8.8.8.8', 80))
+	myaddr = s.getsockname()[0]
+	s.close()
 	a = str(myaddr).split(".")
 	host = a[0]+'.'+a[1]+'.'+a[2]+'.'
 	q=queue.Queue()

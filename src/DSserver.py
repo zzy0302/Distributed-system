@@ -5,7 +5,7 @@ import socket
 import subprocess
 from DSsocket import *
 
-PORT = 20000
+PORT = 20002
 BUF_SIZE = 4096
 
 def callGrepOnVM(grepCall):
@@ -25,7 +25,7 @@ def callGrepOnVM(grepCall):
 			yield
 
 if __name__ == "__main__":
-	scanning()
+	DSscanning()
 	server = TCPSocket()
 	server.bind(('', PORT))
 	server.listen(10)
@@ -39,3 +39,4 @@ if __name__ == "__main__":
 			except:
 				pass
 		c.close()
+		
