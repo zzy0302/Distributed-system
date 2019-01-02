@@ -3,6 +3,7 @@ import json
 import copy
 import time
 import socket
+import functools
 from DSsocket import *
 
 _server_port = 20008
@@ -65,7 +66,7 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 		for node in nodes:
 			node = node_detected(node, mode)
 
-		if reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
+		if functools.reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
 			for node in nodes:
 				if not node['status']:
 					print(node['name'] + 'caught an error.')
