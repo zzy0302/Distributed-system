@@ -62,9 +62,11 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 	while True:
 		for node in nodes:
 			node = node_detected(node, mode)
+			print("2")
 			print (node)
 		if functools.reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
 			for node in nodes:
+				print("3")
 				if not node['status']:
 					print(node['name'] + 'caught an error.')
 				else:
@@ -76,8 +78,10 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 
 if __name__ == "__main__":
 	pattern = sys.argv[1:]
+	print("1")
 	print (pattern)
 	start = time.time()
 	connect_to_server(pattern)
+	print("end")
 	end = time.time()
 	print("Query time: %.4fs" %(end - start))
