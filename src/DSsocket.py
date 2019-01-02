@@ -103,19 +103,19 @@ class TCPSocket:
 		except SocketError as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 
-	def listen(self, backlog):
-		try:
-			self.sock.listen(backlog)
-		except SocketError as e:
-			print(str(e) + ' : ' + self.__class__.__name__)
-
 	def accept(self):
 		try:
 			client_sock, client_info = self.sock.accept()
 			return TCPSocket(client_sock), client_info
 		except SocketError as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
-			
+
+	def listen(self, backlog):
+		try:
+			self.sock.listen(backlog)
+		except SocketError as e:
+			print(str(e) + ' : ' + self.__class__.__name__)
+
 	def activityDetected(self, timeout = None):
 		if timeout == None:
 			ready_to_read, ready_to_write, in_error = select.select([self.sock], [], [])
