@@ -3,14 +3,54 @@ import socket
 import select
 import telnetlib
 import threading
+
 class TCPSocket:
 	def __init__(self, sock=None):
 		try:
 			self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		except SocketError as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
-	def 		
 
+	def get_ip_status(ip):
+	server = telnetlib.Telnet()
+	for port in range(20,100):
+		try:
+			server.open(ip,port)
+			print('{0} port {1} is open'.format(ip, port))
+			node.join(ip)
+		except Exception as err:
+			print('{0} port {1} is not open'.format(ip,port))
+		finally:
+			server.close()
+
+	def check_open(q):
+		try:
+			while True:
+				ip = q.get_nowait()
+				get_ip_status(ip)
+		except queue.Empty as e:
+			pass		
+
+	def scanning:
+		try:	
+			myname = socket.getfqdn(socket.gethostname())
+			myaddr = socket.gethostbyname(myname)
+			a = str(myaddr).split(".")
+			host = a[0]+'.'+a[1]+'.'+a[2]+'.'
+			q=queue.Queue()
+			for i in range(20000,20010):
+				q.put(host+str(i))
+			threads = []
+			node = []
+			for i in range(10):
+				t = threading.Thread(target=check_open,args=(q,))
+				t.start()
+				threads.append(t)
+			for t in threads:
+				t.join()
+			print(node)
+		except SocketError as e:
+			print(str(e) + ' : ' + self.__class__.__name__)
 	def connect(self, host_port):
 		try:
 			self.sock.connect(host_port)
