@@ -52,6 +52,7 @@ def node_detected(node: dict, mode: int) -> dict:
 						print(node['name'] + ': ' + records[i])
 					node['count'] += 1
 				node['buffer'] = records[-1]
+				return node
 			else:
 				node['complete'] = True
 				return node
