@@ -18,10 +18,10 @@ def get_ip_status(ip):
 			server = telnetlib.Telnet(ip,port,timeout=3)
 			node = {'name': 'node_' + str(number), 'ip': str(ip), 'port': str(port)}
 			number = number + 1
-			print (node)
+			# print (node)
 			json.dump(node, file_obj)
 			file_obj.write(',')
-			print("node " + str(number) + " has been added.")
+			# print("node " + str(number) + " has been added.")
 		except Exception as err:
 			pass
 			
@@ -63,7 +63,7 @@ def DSscanning():
 		file_obj.write(']')
 	with open(file_name) as file_obj:
 		nodes = json.load(file_obj)
-		print(nodes)
+		# print(nodes)
 
 class TCPSocket:
 	def __init__(self, sock=None):
