@@ -91,6 +91,7 @@ def new_connect_to_server(pattern, filename='config.json', mode=0):
 				try:
 					if node['sock'].activityDetected(5):
 						chunk = node['sock'].recv(_message_length)
+						print(chunk)
 						if chunk == '':
 							node['complete'] = True
 							# return node
