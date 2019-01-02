@@ -19,7 +19,8 @@ def node_process(pattern: str, nodes: dict) -> dict:
 		try:
 			node['sock'] = TCPSocket()
 			node['sock'].connect((node['ip'], _server_port))
-			pattern_copy = copy.deepcopy(pattern)
+			# pattern_copy = copy.deepcopy(pattern)
+			pattern_copy = pattern
 			message = ' '.join(pattern_copy)
 			node['sock'].send(message)
 			node['status'] = True
