@@ -105,10 +105,10 @@ class TCPSocket:
 			while bytes_recd < msgLen and count < 10:
 				chunk = self.sock.recv(msgLen - bytes_recd)
 
-				if chunk != b''
+				if chunk != b'':
 					chunks.append(chunk)
 					bytes_recd = bytes_recd + len(chunk)
-				else
+				else:
 					count = count+1
 
 		except socket.error as e:
