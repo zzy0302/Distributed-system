@@ -19,7 +19,7 @@ def node_process(pattern: str, nodes: dict) -> dict:
 			node['sock'].connect((node['ip'], _server_port))
 			pattern_copy = copy.deepcopy(pattern)
 
-			m = join(pattern_copy)
+			m = ''.join(pattern_copy)
 			node['sock'].send(m)
 			node['status'] = True
 		except ConnectionRefusedError as e:
