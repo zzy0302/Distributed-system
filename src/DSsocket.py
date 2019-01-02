@@ -103,9 +103,9 @@ class TCPSocket:
 			bytes_recd = 0
 			while bytes_recd < msgLen:
 				chunk = self.sock.recv(msgLen - bytes_recd)
-				if len(chunk) > 1
-					chunks.append(chunk)
-					bytes_recd = bytes_recd + len(chunk)
+				print (chunk)
+				chunks.append(chunk)
+				bytes_recd = bytes_recd + len(chunk)
 		except socket.error as e:
 			print(str(e) + ' : ' + self.__class__.__name__)
 		return b''.join(chunks).decode()
