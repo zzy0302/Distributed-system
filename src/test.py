@@ -7,8 +7,7 @@ import telnetlib
 import threading
 file_name = 'config.json'
 number = 0
-# _all_logs = []
-# _lock = threading.Lock()
+
 
 def get_ip_status(ip):
 	global file_name
@@ -17,16 +16,12 @@ def get_ip_status(ip):
 		port = 22
 		try:
 			server = telnetlib.Telnet(ip,port,timeout=3)
-			# _lock.acquire()
 			node = {'name': 'node_' + str(number), 'ip': str(ip), 'port': str(port)}
-			# node = _all_logs.append(nodes)
 			number = number + 1
 			print (node)
 			json.dump(node, file_obj)
 			file_obj.write(',')
 			print("node " + str(number) + " has been added.")
-			# _lock.release()	
-			#print('{0} port {1} is open'.format(ip, port))
 		except Exception as err:
 			
 			print('{0} port {1} is not open'.format(ip,port))
@@ -40,7 +35,6 @@ def check_open(q):
 		pass		
 
 if __name__ == "__main__":
-	# try:	
 	with open(file_name, 'w') as file_obj:
 		file_obj.write('[')
 	node = []
@@ -64,11 +58,6 @@ if __name__ == "__main__":
 		file_obj.truncate()
 	with open(file_name, 'a') as file_obj:
 		file_obj.write(']')
-	# with open(file_name, 'w') as file_obj:
-	# 	json.dump(_all_logs, file_obj)
 	with open(file_name) as file_obj:
 		nodes = json.load(file_obj)
 		print(nodes)
-	# except Exception as e:
-	# 	print('error')
-		# print(str(e) + ' : ' + self.__class__.__name__)

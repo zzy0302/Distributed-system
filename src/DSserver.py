@@ -5,6 +5,7 @@ import DSsocket
 
 PORT = 12345
 BUF_SIZE = 4096
+<<<<<<< HEAD
 
 
 def parser_msg(msg):
@@ -19,21 +20,20 @@ def parser_grep(grepcmd):
 	return grepcmd_d
 								
 
+=======
+				
+>>>>>>> 0fae74eba307dd5e638d3b56089d6ec10316097d
 if __name__ == "__main__":
-	s = TCPSocket()
-	s.bind(('', PORT))
-	s.listen(10)
-
+	server = TCPSocket()
+	server.bind(('', PORT))
+	server.listen(10)
 	while True:
-		c, addr = s.accept()
-		msg = c.sock.recv(BUF_SIZE)
-		grep_cmd = parser_grep(msg)
-		# do query
-		print(grep_cmd)
-		#query_result = doQuery(pattern, filename)
+		client = server.accept()
+		msg = client.sock.recv(BUF_SIZE)
+		grep_cmd = msg.decode('utf-8')
 		for output in callGrepOnVM(grep_cmd):
 			try:
 				c.send(output.encode())
 			except:
-				continue
+				pass
 		c.close()

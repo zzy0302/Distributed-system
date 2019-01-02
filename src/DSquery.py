@@ -1,8 +1,9 @@
 import re
 import sys
-import subprocess
 import copy
+import subprocess
 
+<<<<<<< HEAD
 
 def doQuery(pattern, filename):
     pattern2 = pattern
@@ -46,6 +47,8 @@ def doQuery2(pattern, filename):
             output = str(idx) + ': ' + line + '\n'
             yield output
     f.close()
+=======
+>>>>>>> 0fae74eba307dd5e638d3b56089d6ec10316097d
 
 
 def callGrepOnVM(grepCall):
@@ -57,8 +60,6 @@ def callGrepOnVM(grepCall):
 		output = subprocess.check_output(pattern).decode('utf-8').strip()
 		output = str(output)
 		output = output.split("\n")
-		# print(output)
-		# print(len(output))
 		for i in range(0, len(output)):
 			yield output[i] + '\n'
 	except subprocess.CalledProcessError as e:
