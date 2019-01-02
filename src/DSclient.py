@@ -20,7 +20,9 @@ def node_process(pattern: str, nodes: dict) -> dict:
 			node['sock'] = TCPSocket()
 			node['sock'].connect((node['ip'], _server_port))
 			# pattern_copy = copy.deepcopy(pattern)
+			print('pattern: ', pattern)
 			pattern_copy = pattern
+			print('pattern_copy: ', pattern_copy)
 			message = ' '.join(pattern_copy)
 			print(message)
 			node['sock'].send(message)
