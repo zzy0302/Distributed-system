@@ -69,7 +69,7 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 		nodes = node_process(pattern, nodes)
 	while True:
 		for node in nodes:
-			# node = node_detected(node, mode)
+			node = node_detected(node, mode)
 			# try:
 			# 	if node['sock'].activityDetected(5):
 			# 		chunk = node['sock'].recv(_message_length)
