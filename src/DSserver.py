@@ -31,7 +31,7 @@ def _scan():
 		os.remove(file_name)
 		os.rename('temp.json', file_name)
 		time.sleep(2)
-	print (_flag)
+	# print (_flag)
 		
 
 
