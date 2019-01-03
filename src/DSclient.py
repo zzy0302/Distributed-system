@@ -134,33 +134,8 @@ def connect_to_server(pattern, filename='config.json', mode=0):
 	while True:
 		for node in nodes:
 			node = node_detected(node, mode)
-			# try:
-			# 	if node['sock'].activityDetected(5):
-			# 		chunk = node['sock'].recv(_message_length)
-			# 		if chunk == '':
-			# 			node['complete'] = True
-			# 			# return node
-			# 		node['buffer'] += chunk
-			# 		records = node['buffer'].split('\n')
-			# 		print('records: ', records)
-			# 		for i in range(len(records) - 1):
-			# 			if mode == 0:
-			# 				print(node['name'] + ': ' + records[i])
-			# 			node['count'] += 1
-			# 		node['buffer'] = records[-1]
-			# 		# return node
-			# 	else:
-			# 		node['complete'] = True
-			# 		# return node
-			# except ConnectionRefusedError as e:
-			# 	print(str(e) + ': ' + node['name'])
-			# 	node['status'] = False
-			# 	node['complete'] = True
-			# # return node
-			# print (node)
 		if functools.reduce((lambda x,y: x and y), [node['complete'] for node in nodes]):
 			for node in nodes:
-				# print("5")
 				if not node['status']:
 					print(node['name'] + 'caught an error.')
 				else:
@@ -176,11 +151,8 @@ if __name__ == "__main__":
 		command = list(filter(None, _input.split()))
 		if command[0] == 'exit':
 			break
-		# pattern = sys.argv[1:]
-		# print("1")
-		# print (pattern)
 		start = time.time()
-		new_connect_to_server(command)
+		connect_to_server(command)
 		print("end")
 		end = time.time()
 		print("Query time: %.4fs" %(end - start))
